@@ -8,6 +8,6 @@ export class AppController {
 
   @Get()
   getHello(): CsvLine[] {
-    return this.csvOrchestrateurService.read('./input/CA20251105_110538.csv');
+    return this.csvOrchestrateurService.read('./input/test.csv');
   }
 }

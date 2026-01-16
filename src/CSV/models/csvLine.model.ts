@@ -1,4 +1,5 @@
 import { UUID } from 'node:crypto';
+import { Category } from './category.enum';
 
 export interface CsvLine {
   id: UUID;
@@ -6,4 +7,5 @@ export interface CsvLine {
   libelle: string;
   credit: number;
   debit: number;
+  category: Category;
 }

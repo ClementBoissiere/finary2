@@ -1,0 +1,43 @@
+<div class="container">
+  <h1>Mes Transactions</h1>
+
+  @if (loading) {
+    <div class="loading">Chargement...</div>
+  }
+
+  @if (error) {
+    <div class="error">{{ error }}</div>
+  }
+
+  @if (!loading && !error) {
+    <div class="categories-grid">
+      @for (category of categories; track category) {
+        <div class="category-card">
+          <div class="category-header">
+            <h2>{{ category }}</h2>
+            <span class="category-total" [class.negative]="getCategoryTotal(category) > 0">
+              {{ getCategoryTotal(category) | number:'1.2-2' }} €
+            </span>
+          </div>
+          <div class="transactions-list">
+            @for (transaction of transactionsByCategory[category]; track transaction.id) {
+              <div class="transaction-item">
+                <div class="transaction-info">
+                  <span class="transaction-date">{{ transaction.date | date:'dd/MM/yyyy' }}</span>
+                  <span class="transaction-libelle">{{ transaction.libelle }}</span>
+                </div>
+                <span class="transaction-amount" [class.credit]="transaction.credit > 0">
+                  @if (transaction.debit > 0) {
+                    -{{ transaction.debit | number:'1.2-2' }} €
+                  } @else {
+                    +{{ transaction.credit | number:'1.2-2' }} €
+                  }
+                </span>
+              </div>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>
